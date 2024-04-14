@@ -3,7 +3,7 @@ import { spawn } from "node:child_process";
 import { makeSource } from "contentlayer/source-remote-files";
 
 const Docs = defineDocumentType(() => ({
-  name: "docs",
+  name: "Docs",
   filePathPattern: `docs/**/*.md`,
   contentType: "markdown",
   fields: {
@@ -29,7 +29,7 @@ const Docs = defineDocumentType(() => ({
 }));
 
 const React = defineDocumentType(() => ({
-  name: "react",
+  name: "ReactStudy",
   filePathPattern: `react/**/*.md`,
   contentType: "markdown",
   fields: {
@@ -110,7 +110,7 @@ const runBashCommand = (command: string) =>
 
 export default makeSource({
   syncFiles: syncContentFromGit,
-  contentDirPath: "r",
+  contentDirPath: "remote-repo",
   contentDirInclude: ["docs", "react"],
   documentTypes: [Docs, React],
   disableImportAliasWarning: true,

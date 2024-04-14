@@ -1,5 +1,10 @@
 import { notFound } from "next/navigation";
-import { allDocs, allReacts } from "contentlayer/generated";
+import {
+  allDocs,
+  allReactStudies,
+  Docs,
+  ReactStudy,
+} from "contentlayer/generated";
 import Link from "next/link";
 
 interface DocsProps {
@@ -8,28 +13,31 @@ interface DocsProps {
   };
 }
 
-export const generateMetadata = (params: DocsProps["params"]) => {
-  const slug = Array.isArray(params.slug) ? params.slug.join("/") : "";
-  const decodedSlug = decodeURIComponent(slug);
-  const docs = allDocs.find((docs) => docs._raw.sourceFileName === decodedSlug);
-  return { title: docs?._id };
-};
+// FIXME:
+// export const generateMetadata = (params: DocsProps["params"]) => {
+//   const slug = Array.isArray(params.slug) ? params.slug.join("/") : "";
+//   const decodedSlug = decodeURIComponent(slug);
+//   const docs = allDocs.find((docs) => docs._raw.sourceFileName === decodedSlug);
+//   return { title: docs?._id };
+// };
 
-function getDocsFromParams(params: DocsProps["params"]) {
+function getDocsFromParams(
+  params: DocsProps["params"]
+): Docs | ReactStudy | null | undefined {
   const isDocs = params.slug.length === 1;
   const slug = Array.isArray(params.slug)
     ? params.slug[params.slug.length - 1]
     : "";
   const decodedSlug = decodeURIComponent(slug);
 
-  let targetData;
+  let targetData: (Docs | ReactStudy)[] | undefined;
 
   if (isDocs) {
     targetData = allDocs;
   } else {
     switch (params.slug[0]) {
       case "react":
-        targetData = allReacts;
+        targetData = allReactStudies;
         break;
       // TODO: case 'logs'
       default:
@@ -38,9 +46,9 @@ function getDocsFromParams(params: DocsProps["params"]) {
 
   if (targetData === undefined) return null;
 
-  return targetData.find((docs) => {
-    console.log(docs._raw.sourceFileName, decodedSlug);
-    return docs._raw.sourceFileName === decodedSlug;
+  return targetData.find((item): item is Docs | ReactStudy => {
+    console.log(item._raw.sourceFileName, decodedSlug);
+    return item._raw.sourceFileName === decodedSlug;
   });
 }
 
