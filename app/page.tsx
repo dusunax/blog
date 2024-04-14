@@ -1,17 +1,26 @@
-import { allPosts } from "@/.contentlayer/generated"
-import Link from "next/link"
+import { allDocs, allReacts } from "@/.contentlayer/generated";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="prose dark:prose-invert">
-      {allPosts.map((post) => (
-        <article key={post._id}>
-          <Link href={post.slug}>
-            <h2>{post.title}</h2>
+    <section className="prose dark:prose-invert">
+      <h2>Docs</h2>
+      {allDocs.map((docs) => (
+        <article key={docs?._id}>
+          <Link href={docs?._id}>
+            <div>{docs?._raw.sourceFileName}</div>
           </Link>
-          {post.description && <p>{post.description}</p>}
         </article>
       ))}
-    </div>
-  )
+
+      <h2>React Study</h2>
+      {allReacts.map((study) => (
+        <article key={"docs/" + study?._id}>
+          <Link href={"docs/" + study?._id}>
+            <div>{study?._raw.sourceFileName}</div>
+          </Link>
+        </article>
+      ))}
+    </section>
+  );
 }
