@@ -58,11 +58,11 @@ const syncContentFromGit = async (contentDir: string) => {
   const syncRun = async () => {
     const gitUrl = "https://github.com/dusunax/javascript.git";
     await runBashCommand(`
-      if [ -d  "${contentDir}" ];
+      if [ -d "${contentDir}" ];
         then
-          cd "${contentDir}"; git pull; rm -rf .github # .github
+          cd "${contentDir}"; git pull;
         else
-          git clone ${gitUrl} ${contentDir}; rm -rf .github # .github;
+          git clone ${gitUrl} ${contentDir};
       fi
     `);
   };
