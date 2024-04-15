@@ -28,7 +28,7 @@ const Docs = defineDocumentType(() => ({
   },
 }));
 
-const React = defineDocumentType(() => ({
+const ReactStudy = defineDocumentType(() => ({
   name: "ReactStudy",
   filePathPattern: `react/**/*.md`,
   contentType: "markdown",
@@ -112,6 +112,6 @@ export default makeSource({
   syncFiles: syncContentFromGit,
   contentDirPath: "remote-repo",
   contentDirInclude: ["docs", "react"],
-  documentTypes: [Docs, React],
+  documentTypes: [Docs, ReactStudy],
   disableImportAliasWarning: true,
 });
