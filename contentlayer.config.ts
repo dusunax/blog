@@ -54,6 +54,48 @@ const ReactStudy = defineDocumentType(() => ({
   },
 }));
 
+const Quiz = defineDocumentType(() => ({
+  name: "Quiz",
+  filePathPattern: `quiz/**/*.mdx`,
+  contentType: "mdx",
+  fields: {
+    raw: {
+      type: "string",
+      required: false,
+    },
+    type: {
+      type: "string",
+      required: false,
+    },
+    title: {
+      type: "string",
+      required: true,
+    },
+    author: {
+      type: "string",
+      required: true,
+    },
+    description: {
+      type: "string",
+      required: false,
+    },
+    answer: {
+      type: "number",
+      required: true,
+    },
+  },
+  computedFields: {
+    url: {
+      type: "string",
+      resolve: (doc) => `/quiz/${doc._raw.flattenedPath}`,
+    },
+    code: {
+      type: "string",
+      resolve: (doc) => doc.raw,
+    },
+  },
+}));
+
 const syncContentFromGit = async (contentDir: string) => {
   const syncRun = async () => {
     const gitUrl = "https://github.com/dusunax/javascript.git";
@@ -62,7 +104,7 @@ const syncContentFromGit = async (contentDir: string) => {
         then
           cd "${contentDir}"; git pull;
         else
-          git clone ${gitUrl} ${contentDir};
+          git clone --depth 1 --signle-branch ${gitUrl} ${contentDir};
       fi
     `);
   };
@@ -111,7 +153,7 @@ const runBashCommand = (command: string) =>
 export default makeSource({
   syncFiles: syncContentFromGit,
   contentDirPath: "remote-repo",
-  contentDirInclude: ["docs", "react"],
-  documentTypes: [Docs, ReactStudy],
+  contentDirInclude: ["docs", "react", "quiz"],
+  documentTypes: [Docs, ReactStudy, Quiz],
   disableImportAliasWarning: true,
 });

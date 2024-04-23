@@ -46,10 +46,10 @@ function getDocsFromParams(
 
   if (targetData === undefined) return null;
 
-  return targetData.find((item): item is Docs | ReactStudy => {
-    console.log(item._raw.sourceFileName, decodedSlug);
-    return item._raw.sourceFileName === decodedSlug;
-  });
+  return targetData.find(
+    (item): item is Docs | ReactStudy =>
+      item._raw.sourceFileName === decodedSlug
+  );
 }
 
 export default async function docsPage({ params }: DocsProps) {
