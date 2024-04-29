@@ -96,30 +96,18 @@ const Quiz = defineDocumentType(() => ({
   },
 }));
 
-const syncContentFromGit = async (contentDir: string) => {
-  const syncRun = async () => {
-    const gitUrl = "https://github.com/dusunax/javascript.git";
-    await runBashCommand(`
-      if [ -d "${contentDir}" ];
-        then
-          cd "${contentDir}"; git pull;
-        else
-          git clone --depth 1 --signle-branch ${gitUrl} ${contentDir};
-      fi
-    `);
-  };
-
+const syncContentFromGit = async () => {
   let wasCancelled = false;
   let syncInterval: NodeJS.Timeout | undefined;
 
   const syncLoop = async () => {
     console.log("Syncing content files from git");
 
-    await syncRun();
+    await runBashCommand(" git submodule update --remote");
 
     if (wasCancelled) return;
 
-    syncInterval = setTimeout(syncLoop, 1000 * 60);
+    syncInterval = setTimeout(syncLoop, 1000 * 60 * 5);
   };
 
   // Block until the first sync is done
@@ -152,7 +140,7 @@ const runBashCommand = (command: string) =>
 
 export default makeSource({
   syncFiles: syncContentFromGit,
-  contentDirPath: "remote-repo",
+  contentDirPath: "sub-docs",
   contentDirInclude: ["docs", "react", "quiz"],
   documentTypes: [Docs, ReactStudy, Quiz],
   disableImportAliasWarning: true,

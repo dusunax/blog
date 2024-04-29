@@ -1,0 +1,3 @@
+[submodule "sub-docs"]
+	path = sub-docs
+	url = https://github.com/dusunax/javascript
