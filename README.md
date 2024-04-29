@@ -10,7 +10,8 @@
 
 ## Features
 
-- [ ] 📄 Support for Markdown documentation
+- [x] 📄 Support for Markdown documentation
+  - [#S0-Project Init](https://github.com/dusunax/blog/issues/1), [#S1-Display markdown documentations](https://github.com/dusunax/blog/issues/3)
 - [ ] 📦 Render Markdown files from remote data source (GitHub repository)
 - [ ] 🎥 Display demonstration videos (YouTube)
 - [ ] 📝 Iframe blog (Tistory, Velog)
