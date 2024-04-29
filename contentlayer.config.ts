@@ -103,7 +103,7 @@ const syncContentFromGit = async () => {
   const syncLoop = async () => {
     console.log("Syncing content files from git");
 
-    await runBashCommand(" git submodule update --remote");
+    await runBashCommand("git submodule update --remote");
 
     if (wasCancelled) return;
 
