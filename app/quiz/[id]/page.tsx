@@ -1,7 +1,7 @@
 import { allQuizzes } from "contentlayer/generated";
-import { Mdx } from "@/components/mdxComponents";
-import QuizMeta from "@/components/quizMeta";
-import QuizComponent from "@/components/quizComponent";
+import { Mdx } from "@/components/MdxComponents";
+import QuizMeta from "@/components/QuizMeta";
+import QuizComponent from "@/components/QuizComponent";
 
 interface QuizProps {
   params: {
