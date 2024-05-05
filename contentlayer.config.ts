@@ -140,7 +140,7 @@ const runBashCommand = (command: string) =>
 
 export default makeSource({
   syncFiles: syncContentFromGit,
-  contentDirPath: "sub-docs",
+  contentDirPath: "public/sub-docs",
   contentDirInclude: ["docs", "react", "quiz"],
   documentTypes: [Docs, ReactStudy, Quiz],
   disableImportAliasWarning: true,
