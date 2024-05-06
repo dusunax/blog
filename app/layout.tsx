@@ -29,7 +29,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
                 <ModeToggle />
                 <nav className="ml-auto text-sm font-medium space-x-6">
                   <Link href="/">Home</Link>
-                  <Link href="/gallery">Gallery</Link>
+                  <Link href="/gallery" prefetch>
+                    Gallery
+                  </Link>
                   <Link href="/quiz">Quiz</Link>
                   {/* <Link href="/about">About</Link>
                   <Link href="/posts">Posts</Link>

@@ -1,8 +1,9 @@
 import fs from "fs";
 import path from "path";
-import PDFSlideList from "@/components/gallery/PDFSlideList";
-import ImageSlideList from "@/components/gallery/ImageSlideList";
+
 import { PDF_DIR_PATHS, SLIDES_DIR_PATHS } from "@/constant/path";
+import { extractDateFromFilename } from "../util/filename.util";
+import SlideList from "@/components/gallery/SlideList";
 
 export const metadata = generateMetadata();
 
@@ -15,18 +16,16 @@ function generateMetadata() {
 
 export default async function GalleryPage() {
   const pdfFileList = await getPdfFileList();
-  const groupedFileList = (
+  const pngFileList = (
     await Promise.all(SLIDES_DIR_PATHS.map(getDirFileList))
   ).flat();
+  const fileList = [...pdfFileList, ...pngFileList];
 
   return (
     <section className="prose dark:prose-invert max-w-none">
       <h1>Gallery</h1>
       <hr />
-
-      <h2 id="slides">Slides</h2>
-      <PDFSlideList fileList={pdfFileList} />
-      <ImageSlideList fileList={groupedFileList} />
+      <SlideList fileList={fileList} />
     </section>
   );
 }
@@ -36,6 +35,7 @@ export interface FileType {
   files: string[];
   filePath: string;
   fileExt: string;
+  createdAt: string;
 }
 
 async function getPdfFileList() {
@@ -49,6 +49,7 @@ async function getPdfFileList() {
         files: [file],
         filePath: `${path.split("./public")[1]}/${file}`,
         fileExt: file.split(".").pop() || "",
+        createdAt: extractDateFromFilename(file.split(".")[0]),
       });
     });
   });
@@ -81,6 +82,7 @@ async function getDirFileList(directoryPath: string) {
           files: [path.parse(file).base],
           filePath: filePath.split("public")[1],
           fileExt: path.parse(file).ext.split(".")[1],
+          createdAt: extractDateFromFilename(folderName),
         });
       }
     }

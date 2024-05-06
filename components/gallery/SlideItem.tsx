@@ -20,20 +20,23 @@ export default function SlideItem({
   const imagePath = `${path}?slide-length=${files.length}&exe=png`;
 
   return (
-    <Link href={`${fileExt === "pdf" ? pdfPath : imagePath}`}>
-      <li
-        key={name}
-        className="relative flex flex-col p-0 shadow-md rounded-md min-h-[20rem] border"
-      >
+    <li
+      key={name}
+      className="relative flex flex-col p-0 shadow-lg rounded-md min-h-[20rem] border"
+    >
+      <Link href={`${fileExt === "pdf" ? pdfPath : imagePath}`} className="m-0">
         {children}
-        <div className="px-3 my-2 min-h-[4rem] flex justify-between gap-2">
-          <h3 className="text-md break-all my-0 overflow-ellipsis">
+      </Link>
+      <div className="flex-1 px-3 my-2 min-h-[4rem] flex justify-between gap-2">
+        <div className="flex-1 flex flex-col justify-between">
+          <h3 className="text-md my-0 overflow-ellipsis leading-6">
             {itemTitle}
           </h3>
-
-          <SlideItemButtonBox file={file} />
+          <span className="text-sm">{file.createdAt}</span>
         </div>
-      </li>
-    </Link>
+
+        <SlideItemButtonBox file={file} />
+      </div>
+    </li>
   );
 }
