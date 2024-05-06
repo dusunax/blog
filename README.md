@@ -10,8 +10,8 @@
 
 ## Features
 
-- [ ] 📄 Support for Markdown documentation
-- [ ] 📦 Render Markdown files from remote data source (GitHub repository)
+- [x] 📄 Support for Markdown documentation
+- [ ] 📦 Render Markdown, PDF, images files from remote data source (GitHub repository)
 - [ ] 🎥 Display demonstration videos (YouTube)
 - [ ] 📝 Iframe blog (Tistory, Velog)
 - [ ] 🌗 dark mode configuration
