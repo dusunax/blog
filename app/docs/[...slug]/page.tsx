@@ -2,8 +2,10 @@ import { notFound } from "next/navigation";
 import {
   allDocs,
   allReactStudies,
+  allTypescriptStudies,
   Docs,
   ReactStudy,
+  TypescriptStudy,
 } from "contentlayer/generated";
 import Link from "next/link";
 
@@ -13,24 +15,28 @@ interface DocsProps {
   };
 }
 
-// FIXME:
-// export const generateMetadata = (params: DocsProps["params"]) => {
-//   const slug = Array.isArray(params.slug) ? params.slug.join("/") : "";
-//   const decodedSlug = decodeURIComponent(slug);
-//   const docs = allDocs.find((docs) => docs._raw.sourceFileName === decodedSlug);
-//   return { title: docs?._id };
-// };
+export const generateMetadata = ({
+  params,
+}: {
+  params: DocsProps["params"];
+}) => {
+  const filename = Array.isArray(params.slug)
+    ? params.slug[params.slug.length - 1]
+    : "Document";
+
+  return { title: filename };
+};
 
 function getDocsFromParams(
   params: DocsProps["params"]
-): Docs | ReactStudy | null | undefined {
+): Docs | ReactStudy | TypescriptStudy | null | undefined {
   const isDocs = params.slug.length === 1;
   const slug = Array.isArray(params.slug)
     ? params.slug[params.slug.length - 1]
     : "";
   const decodedSlug = decodeURIComponent(slug);
 
-  let targetData: (Docs | ReactStudy)[] | undefined;
+  let targetData: (Docs | ReactStudy | TypescriptStudy)[] | undefined;
 
   if (isDocs) {
     targetData = allDocs;
@@ -39,7 +45,9 @@ function getDocsFromParams(
       case "react":
         targetData = allReactStudies;
         break;
-      // TODO: case 'logs'
+      case "typescript":
+        targetData = allTypescriptStudies;
+        break;
       default:
     }
   }
@@ -47,7 +55,7 @@ function getDocsFromParams(
   if (targetData === undefined) return null;
 
   return targetData.find(
-    (item): item is Docs | ReactStudy =>
+    (item): item is Docs | ReactStudy | TypescriptStudy =>
       item._raw.sourceFileName === decodedSlug
   );
 }

@@ -134,7 +134,7 @@ const syncContentFromGit = async () => {
 
     if (wasCancelled) return;
 
-    syncInterval = setTimeout(syncLoop, 1000 * 60);
+    syncInterval = setTimeout(syncLoop, 1000 * 60 * 10);
   };
 
   // Block until the first sync is done
