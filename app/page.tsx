@@ -1,4 +1,8 @@
-import { allDocs, allReactStudies } from "@/.contentlayer/generated";
+import {
+  allDocs,
+  allReactStudies,
+  allTypescriptStudies,
+} from "@/.contentlayer/generated";
 import Link from "next/link";
 
 export default function Home() {
@@ -15,6 +19,15 @@ export default function Home() {
 
       <h2>React Study</h2>
       {allReactStudies.map((study) => (
+        <article key={"docs/" + study?._id}>
+          <Link href={"docs/" + study?._id}>
+            <div>{study?._raw.sourceFileName}</div>
+          </Link>
+        </article>
+      ))}
+
+      <h2>Typescript Study</h2>
+      {allTypescriptStudies.map((study) => (
         <article key={"docs/" + study?._id}>
           <Link href={"docs/" + study?._id}>
             <div>{study?._raw.sourceFileName}</div>

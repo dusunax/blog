@@ -54,6 +54,33 @@ const ReactStudy = defineDocumentType(() => ({
   },
 }));
 
+const TypescriptStudy = defineDocumentType(() => ({
+  name: "TypescriptStudy",
+  filePathPattern: `typescript/effective-typescript/**/*.md`,
+  contentType: "markdown",
+  fields: {
+    raw: {
+      type: "string",
+      required: false,
+    },
+    type: {
+      type: "string",
+      required: false,
+    },
+  },
+  computedFields: {
+    url: {
+      type: "string",
+      resolve: (doc) =>
+        `/typescript/effective-typescript/${doc._raw.flattenedPath}`,
+    },
+    code: {
+      type: "string",
+      resolve: (doc) => doc.raw,
+    },
+  },
+}));
+
 const Quiz = defineDocumentType(() => ({
   name: "Quiz",
   filePathPattern: `quiz/**/*.mdx`,
@@ -107,7 +134,7 @@ const syncContentFromGit = async () => {
 
     if (wasCancelled) return;
 
-    syncInterval = setTimeout(syncLoop, 1000 * 60 * 5);
+    syncInterval = setTimeout(syncLoop, 1000 * 60);
   };
 
   // Block until the first sync is done
@@ -141,7 +168,7 @@ const runBashCommand = (command: string) =>
 export default makeSource({
   syncFiles: syncContentFromGit,
   contentDirPath: "public/sub-docs",
-  contentDirInclude: ["docs", "react", "quiz"],
-  documentTypes: [Docs, ReactStudy, Quiz],
+  contentDirInclude: ["docs", "react", "typescript", "quiz"],
+  documentTypes: [Docs, ReactStudy, TypescriptStudy, Quiz],
   disableImportAliasWarning: true,
 });
