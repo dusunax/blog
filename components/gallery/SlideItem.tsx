@@ -1,6 +1,7 @@
 import { PropsWithChildren } from "react";
 import { FileType } from "@/app/gallery/page";
 import Link from "next/link";
+import SlideItemButtonBox from "./SlideItemButtonBox";
 
 interface SlideItemProps extends PropsWithChildren {
   file: FileType;
@@ -22,10 +23,16 @@ export default function SlideItem({
     <Link href={`${fileExt === "pdf" ? pdfPath : imagePath}`}>
       <li
         key={name}
-        className="border flex flex-col p-0 shadow-md rounded-md min-h-[20rem]"
+        className="relative flex flex-col p-0 shadow-md rounded-md min-h-[20rem] border"
       >
         {children}
-        <h3 className="px-4 my-2 text-md min-h-[4rem]">{itemTitle}</h3>
+        <div className="px-3 my-2 min-h-[4rem] flex justify-between gap-2">
+          <h3 className="text-md break-all my-0 overflow-ellipsis">
+            {itemTitle}
+          </h3>
+
+          <SlideItemButtonBox file={file} />
+        </div>
       </li>
     </Link>
   );

@@ -31,6 +31,7 @@ export default async function GalleryDetailPage(props: DocsProps) {
 
   return (
     <article className="w-full flex-1 flex flex-col max-w-none py-6 prose dark:prose-invert">
+      <Link href="/gallery#slides">Gallery/Slides</Link>
       <div className="flex h-full justify-between items-center">
         <h1 className="mb-2">{lastSlug}</h1>
         <Link

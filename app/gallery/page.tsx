@@ -24,7 +24,7 @@ export default async function GalleryPage() {
       <h1>Gallery</h1>
       <hr />
 
-      <h2>Slides</h2>
+      <h2 id="slides">Slides</h2>
       <PDFSlideList fileList={pdfFileList} />
       <ImageSlideList fileList={groupedFileList} />
     </section>
@@ -80,7 +80,7 @@ async function getDirFileList(directoryPath: string) {
           name: folderName,
           files: [path.parse(file).base],
           filePath: filePath.split("public")[1],
-          fileExt: path.parse(file).ext,
+          fileExt: path.parse(file).ext.split(".")[1],
         });
       }
     }
