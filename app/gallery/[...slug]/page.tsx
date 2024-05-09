@@ -20,7 +20,7 @@ export const generateMetadata = ({
   return { title: filename };
 };
 
-export default async function GalleryDetailPage(props: DocsProps) {
+export default function GalleryDetailPage(props: DocsProps) {
   const { params, searchParams } = props;
   const filePath = params.slug.join("/");
   const lastSlug = params.slug[params.slug.length - 1];
@@ -44,7 +44,12 @@ export default async function GalleryDetailPage(props: DocsProps) {
       <hr className="my-4" />
 
       {isPDF && <iframe src={`/${filePath}`} className="w-full flex-1" />}
-      {isImage && <SlideImages filePath={filePath} length={length} />}
+      {isImage && (
+        <>
+          {/* @ts-expect-error Async Server Component */}
+          <SlideImages filePath={filePath} length={length} />
+        </>
+      )}
     </article>
   );
 }

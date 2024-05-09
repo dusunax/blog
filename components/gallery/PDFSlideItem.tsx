@@ -1,7 +1,7 @@
 import { FileType } from "@/app/gallery/page";
 import SlideItem from "./SlideItem";
 import PDFThumbnail from "./PDFThumbnail";
-import { removeDateFromFilename } from "@/app/util/filename.util";
+import { removeDateFromFilename } from "@/utils/filename";
 
 interface PDFSlideListProps {
   file: FileType;

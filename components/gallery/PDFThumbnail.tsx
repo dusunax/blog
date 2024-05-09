@@ -16,7 +16,7 @@ export default function PDFThumbnail({ file }: { file: FileType }) {
 
   return (
     <div
-      className="flex-1 rounded-t-md overflow-hidden max-h-[230px] p-0 flex justify-center relative"
+      className="flex-1 rounded-t-md overflow-hidden h-[230px] p-0 flex justify-center relative"
       style={{ fontSize: 0 }}
     >
       <Document file={file.filePath} onLoadSuccess={onDocumentLoadSuccess}>

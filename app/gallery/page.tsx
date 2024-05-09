@@ -2,7 +2,8 @@ import fs from "fs";
 import path from "path";
 
 import { PDF_DIR_PATHS, SLIDES_DIR_PATHS } from "@/constant/path";
-import { extractDateFromFilename } from "../util/filename.util";
+import { getPlaceholderList } from "@/utils/getPlaceholderList";
+import { extractDateFromFilename } from "@/utils/filename";
 import SlideList from "@/components/gallery/SlideList";
 
 export const metadata = generateMetadata();
@@ -20,12 +21,13 @@ export default async function GalleryPage() {
     await Promise.all(SLIDES_DIR_PATHS.map(getDirFileList))
   ).flat();
   const fileList = [...pdfFileList, ...pngFileList];
+  const blurDataURLs = await getPlaceholderList(fileList);
 
   return (
     <section className="prose dark:prose-invert max-w-none">
       <h1>Gallery</h1>
       <hr />
-      <SlideList fileList={fileList} />
+      <SlideList fileList={fileList} placeholderList={blurDataURLs} />
     </section>
   );
 }
@@ -36,6 +38,7 @@ export interface FileType {
   filePath: string;
   fileExt: string;
   createdAt: string;
+  placeholderImage?: string;
 }
 
 async function getPdfFileList() {
