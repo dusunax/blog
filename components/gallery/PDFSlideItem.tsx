@@ -9,11 +9,7 @@ interface PDFSlideListProps {
 
 export default function PDFSlideItem({ file }: PDFSlideListProps) {
   return (
-    <SlideItem
-      file={file}
-      itemTitle={removeDateFromFilename(file.name)}
-      key={file.name}
-    >
+    <SlideItem file={file} itemTitle={removeDateFromFilename(file.name)}>
       <PDFThumbnail file={file} />
     </SlideItem>
   );

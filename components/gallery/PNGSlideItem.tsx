@@ -6,6 +6,7 @@ import { PlaceholderList } from "@/type/image";
 import SlideItem from "./SlideItem";
 import { FileType } from "@/app/gallery/page";
 import ThumbnailTagBox from "./ThumbnailTagBox";
+import ThumbnailBox from "./ThumbnailBox";
 
 interface PNGSlideItemProps {
   file: FileType;
@@ -22,7 +23,7 @@ export default async function PNGSlideItem({
       itemTitle={removeDateFromFilename(file.name)}
       key={file.name}
     >
-      <div className="relative flex-1 h-[230px] m-0 rounded-t-md overflow-hidden">
+      <ThumbnailBox>
         {placeholder?.base64 && (
           <Image
             src={file.filePath}
@@ -35,7 +36,7 @@ export default async function PNGSlideItem({
           />
         )}
         <ThumbnailTagBox file={file} numPages={file.files.length} />
-      </div>
+      </ThumbnailBox>
     </SlideItem>
   );
 }

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import { UnwrapPromise } from "next/dist/lib/coalesced-function";
 
 import { FileType } from "@/app/gallery/page";
@@ -43,8 +43,8 @@ export default function SlideList({
       </div>
 
       <SlideListWrapper>
-        {sortedFileList.map((file) => (
-          <>
+        {sortedFileList.map((file, idx) => (
+          <Fragment key={idx + file.name}>
             {file.fileExt === "pdf" && <PDFSlideItem file={file} />}
             {file.fileExt === "png" && (
               <>
@@ -57,7 +57,7 @@ export default function SlideList({
                 />
               </>
             )}
-          </>
+          </Fragment>
         ))}
       </SlideListWrapper>
     </>
