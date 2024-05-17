@@ -45,7 +45,7 @@ export default function SlideList({
       <SlideListWrapper>
         {sortedFileList.map((file) => (
           <>
-            {/* {file.fileExt === "pdf" && <PDFSlideItem file={file} />} */}
+            {file.fileExt === "pdf" && <PDFSlideItem file={file} />}
             {file.fileExt === "png" && (
               <>
                 {/* @ts-expect-error Async Server Component */}
