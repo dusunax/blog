@@ -12,9 +12,11 @@ export default function ThumbnailTagBox({
       <span className="bg-[rgba(0,0,0,0.5)] m-0 p-2 h-full flex justify-center items-center rounded-lg">
         {file.fileExt}
       </span>
-      <span className="bg-[rgba(0,0,0,0.5)] m-0 p-2 h-full flex justify-center items-center rounded-lg">
-        {numPages}p
-      </span>
+      {numPages !== 0 && (
+        <span className="bg-[rgba(0,0,0,0.5)] m-0 p-2 h-full flex justify-center items-center rounded-lg">
+          {numPages}p
+        </span>
+      )}
     </div>
   );
 }

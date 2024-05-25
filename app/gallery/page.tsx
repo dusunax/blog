@@ -16,7 +16,9 @@ function generateMetadata() {
 }
 
 export default async function GalleryPage() {
-  const pdfFileList = await getPdfFileList();
+  const pdfFileList = (
+    await Promise.all(PDF_DIR_PATHS.map(getPdfFileList))
+  ).flat();
   const pngFileList = (
     await Promise.all(SLIDES_DIR_PATHS.map(getDirFileList))
   ).flat();
@@ -41,23 +43,24 @@ export interface FileType {
   placeholderImage?: string;
 }
 
-async function getPdfFileList() {
-  let PDFFiles: FileType[] = [];
+async function getPdfFileList(directoryPath: string) {
+  const files = fs.readdirSync(directoryPath);
+  const groupedFiles: FileType[] = [];
 
-  PDF_DIR_PATHS.forEach((path) => {
-    const filePaths = fs.readdirSync(path);
-    filePaths.forEach((file) => {
-      PDFFiles.push({
-        name: file.split(".")[0],
-        files: [file],
-        filePath: `${path.split("./public")[1]}/${file}`,
-        fileExt: file.split(".").pop() || "",
-        createdAt: extractDateFromFilename(file.split(".")[0]),
-      });
+  for (const file of files) {
+    const filePath = path.join(directoryPath, file);
+    const stats = fs.statSync(filePath);
+
+    groupedFiles.push({
+      name: file.split(".")[0],
+      files: [file],
+      filePath: filePath,
+      fileExt: file.split(".").pop() || "",
+      createdAt: extractDateFromFilename(file.split(".")[0]),
     });
-  });
+  }
 
-  return PDFFiles.filter((file) => file.fileExt === "pdf");
+  return groupedFiles.filter((file) => file.fileExt === "pdf");
 }
 
 //

@@ -4,4 +4,7 @@ export const SLIDES_DIR_PATHS = [
   "./public/sub-docs/ppts/design/",
 ];
 
-export const PDF_DIR_PATHS = ["./public/sub-docs/ppts/react"];
+export const PDF_DIR_PATHS = [
+  "./public/sub-docs/ppts/react",
+  "./public/sub-docs/ppts/typescript",
+];

@@ -32,7 +32,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
                   <Link href="/gallery" prefetch>
                     Gallery
                   </Link>
-                  <Link href="/quiz">Quiz</Link>
+                  {/* <Link href="/quiz">Quiz</Link> */}
                   {/* <Link href="/about">About</Link>
                   <Link href="/posts">Posts</Link>
                   <Link href="/blog">Blog</Link> */}
