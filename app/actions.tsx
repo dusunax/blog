@@ -1,7 +1,7 @@
 "use server";
 import VideoItem from "@/components/Videos/VideoItem";
 
-export async function getVideoByComponents(): Promise<React.ReactElement[]> {
+export async function getVideoByComponents() {
   const YOUTUBE = [
     { id: 0, key: "RyBy_mB4Ex4" },
     { id: 1, key: "C5cSWuhuU1I" },
