@@ -17,7 +17,10 @@ export default async function VideoPage() {
       <Suspense>
         <SlideListWrapper>
           {data.map((item) => (
-            <li className="relative flex flex-col shadow-lg rounded-md p-0 pb-[56.25%] border overflow-hidden bg-black">
+            <li
+              className="relative flex flex-col shadow-lg rounded-md p-0 pb-[56.25%] border overflow-hidden bg-black"
+              key={item.key}
+            >
               {item}
             </li>
           ))}
