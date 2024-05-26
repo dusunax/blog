@@ -11,19 +11,20 @@ interface QuizProps {
 }
 
 export default function QuizPage({ params }: QuizProps) {
-  const currentQuiz = allQuizzes.find(
-    (item) => item._raw.sourceFileName === params.id
-  );
+  return <></>;
+  // const currentQuiz = allQuizzes.find(
+  //   (item) => item._raw.sourceFileName === params.id
+  // );
 
-  if (!currentQuiz) return null;
+  // if (!currentQuiz) return null;
 
-  const MDX = Mdx(currentQuiz.body);
+  // const MDX = Mdx(currentQuiz.body);
 
-  return (
-    <>
-      <QuizMeta content={currentQuiz.body} quiz={currentQuiz} />
-      <hr className="my-10" />
-      <QuizComponent mdx={MDX} answerNum={currentQuiz.answer} />
-    </>
-  );
+  // return (
+  //   <>
+  //     <QuizMeta content={currentQuiz.body} quiz={currentQuiz} />
+  //     <hr className="my-10" />
+  //     <QuizComponent mdx={MDX} answerNum={currentQuiz.answer} />
+  //   </>
+  // );
 }
