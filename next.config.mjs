@@ -7,7 +7,6 @@ import { withContentlayer } from "next-contentlayer";
 const nextConfig = withImages({
   experimental: {
     appDir: true,
-    serverActions: true,
   },
   output: "standalone",
   images: {
