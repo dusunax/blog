@@ -8,6 +8,7 @@ const nextConfig = withImages({
   experimental: {
     appDir: true,
   },
+  output: "standalone",
   images: {
     formats: ["image/avif", "image/webp"],
   },
