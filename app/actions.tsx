@@ -1,5 +1,4 @@
 "use server";
-import VideoItem from "@/components/Videos/VideoItem";
 
 export async function getVideoByComponents() {
   const YOUTUBE = [
@@ -12,5 +11,13 @@ export async function getVideoByComponents() {
     { id: 6, key: "jOs3qfMGhNI" },
   ];
 
-  return YOUTUBE.map((video) => <VideoItem key={video.id} video={video} />);
+  return YOUTUBE.map((video) => (
+    <iframe
+      key={video.key}
+      src={`https://www.youtube.com/embed/${video.key}`}
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowFullScreen
+      className="absolute w-full h-full scale-[101%] -top-5 left-0"
+    />
+  ));
 }
