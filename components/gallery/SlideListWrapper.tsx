@@ -1,5 +1,7 @@
-import { PropsWithChildren } from "react";
+import { ReactNode } from "react";
 
-export default function SlideListWrapper({ children }: PropsWithChildren) {
-  return <ul className="p-0 grid grid-cols-2 gap-4">{children}</ul>;
+export default function SlideListWrapper({ children }: {children: ReactNode}) {
+  return (
+    <ul className="p-0 grid grid-cols-1 gap-4 sm:grid-cols-2">{children}</ul>
+  );
 }
