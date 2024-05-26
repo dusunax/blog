@@ -50,7 +50,7 @@ export default function QuizComponent({ mdx: MDX, answerNum }: QuizProps) {
         node.removeEventListener("mouseleave", handleMouseOut);
       });
     };
-  }, [quizDOM.current]);
+  }, []);
 
   const isCorrectAnswer = () => {
     console.log("answer-" + answerNum, answer);
