@@ -9,9 +9,7 @@ export default async function VideoPage() {
     <section className="prose dark:prose-invert max-w-none flex-1 flex flex-col">
       <h1>Videos</h1>
 
-      <Suspense>
-        <SlideListWrapper>{data}</SlideListWrapper>
-      </Suspense>
+      <Suspense>{/* <SlideListWrapper>{data}</SlideListWrapper> */}</Suspense>
     </section>
   );
 }
