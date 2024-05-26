@@ -33,6 +33,7 @@ const TabCol = ({ tabIndex, setTabIndex }: Props) => {
           index={index}
           tabIndex={tabIndex}
           setTabIndex={setTabIndex}
+          key={tab.name}
         />
       ))}
     </ul>
